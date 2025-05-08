@@ -38,7 +38,7 @@
     function drawTable() {
       var queryString = encodeURIComponent('SELECT A, C, D, E WHERE A IS NOT NULL AND C IS NOT NULL AND D IS NOT NULL AND E IS NOT NULL');
       var query = new google.visualization.Query(
-        'https://docs.google.com/spreadsheets/d/e/2PACX-1vRT0vNgnMucAGvykBYoEzsvTaficsjXUzDVL5E7zmUsC09owHtu7Nli9lnTUI6onniD2QRllbUtbD7n/pubhtml?gid=0&single=true&widget=true&headers=false&range=A1:E10');
+        'https://docs.google.com/spreadsheets/d/e/2PACX-1vRT0vNgnMucAGvykBYoEzsvTaficsjXUzDVL5E7zmUsC09owHtu7Nli9lnTUI6onniD2QRllbUtbD7n/pubhtml?gid=0&single=true&widget=true&headers=false');
       query.send(handleQueryResponse);
     }
 
