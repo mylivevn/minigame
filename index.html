@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Hiển thị cột A, C, D, E có dữ liệu</title>
+  <title>Hiển thị cột A, C, D, E</title>
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <style>
     body {
@@ -36,7 +36,8 @@
     google.charts.setOnLoadCallback(drawTable);
 
     function drawTable() {
-      var queryString = encodeURIComponent('SELECT A, C, D, E WHERE A IS NOT NULL AND C IS NOT NULL AND D IS NOT NULL AND E IS NOT NULL');
+      // Lấy tất cả dữ liệu từ cột A, C, D, E mà không cần lọc
+      var queryString = encodeURIComponent('SELECT A, C, D, E');
       var query = new google.visualization.Query(
         'https://docs.google.com/spreadsheets/d/e/2PACX-1vRT0vNgnMucAGvykBYoEzsvTaficsjXUzDVL5E7zmUsC09owHtu7Nli9lnTUI6onniD2QRllbUtbD7n/pubhtml?gid=0&single=true&widget=true&headers=false');
       query.send(handleQueryResponse);
