@@ -3,29 +3,55 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Dự đoán kết quả Bida</title>
+  <title>Hiển thị cột A, C, D, E có dữ liệu</title>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <style>
-    html, body {
-      margin: 0;
-      padding: 0;
+    body {
       background-color: transparent;
       font-family: Arial, sans-serif;
       color: white;
       overflow: hidden;
     }
 
-    iframe {
-      width: 100vw;
-      height: 100vh;
-      border: none;
-      background-color: transparent;
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    td, th {
+      border: 1px solid white;
+      padding: 8px;
+      text-align: center;
     }
   </style>
 </head>
 <body>
-  <iframe 
-    src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTmmMF8IffBt5sAO4lthmA94-AeOeEOp-QUfHaMtVcnzXWa7VrC9VJxKqXAfgnSViobW1vcHjvxSCZY/pubhtml?gid=0&single=true&widget=true&headers=false"
-    allowtransparency="true">
-  </iframe>
+
+  <div id="table_div"></div>
+
+  <script type="text/javascript">
+    google.charts.load('current', {
+      packages: ['table']
+    });
+    google.charts.setOnLoadCallback(drawTable);
+
+    function drawTable() {
+      var queryString = encodeURIComponent('SELECT A, C, D, E WHERE A IS NOT NULL AND C IS NOT NULL AND D IS NOT NULL AND E IS NOT NULL');
+      var query = new google.visualization.Query(
+        'https://docs.google.com/spreadsheets/d/e/2PACX-1vRT0vNgnMucAGvykBYoEzsvTaficsjXUzDVL5E7zmUsC09owHtu7Nli9lnTUI6onniD2QRllbUtbD7n/pubhtml?gid=0&single=true&widget=true&headers=false&range=A1:E10');
+      query.send(handleQueryResponse);
+    }
+
+    function handleQueryResponse(response) {
+      if (response.isError()) {
+        alert('Có lỗi khi truy vấn dữ liệu từ Google Sheets: ' + response.getMessage() + ' ' + response.getDetailedMessage());
+        return;
+      }
+      var data = response.getDataTable();
+      var table = new google.visualization.Table(document.getElementById('table_div'));
+      table.draw(data, {showRowNumber: false, width: '100%', height: '100%'});
+    }
+  </script>
+
 </body>
 </html>
