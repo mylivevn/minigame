@@ -36,10 +36,9 @@
     google.charts.setOnLoadCallback(drawTable);
 
     function drawTable() {
-      // Lấy tất cả dữ liệu từ cột A, C, D, E
       var queryString = encodeURIComponent('SELECT A, C, D, E');
       var query = new google.visualization.Query(
-        'https://docs.google.com/spreadsheets/d/e/2PACX-1vRT0vNgnMucAGvykBYoEzsvTaficsjXUzDVL5E7zmUsC09owHtu7Nli9lnTUI6onniD2QRllbUtbD7n/pubhtml?gid=0&single=true&widget=true&headers=false');
+        'https://docs.google.com/spreadsheets/d/e/2PACX-1vRT0vNgnMucAGvykBYoEzsvTaficsjXUzDVL5E7zmUsC09owHtu7Nli9lnTUI6onniD2QRllbUtbD7n/pubhtml?gid=0&single=true&widget=true&headers=true');
       query.send(handleQueryResponse);
     }
 
