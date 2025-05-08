@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Minigame Dự Đoán</title>
+    <style>
+      body {
+        background-color: rgba(0, 0, 0, 0.1);
+        color: white;
+        font-family: Arial, sans-serif;
+        overflow: hidden;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      td, th {
+        border: 1px solid white;
+        padding: 8px;
+        text-align: center;
+      }
+
+      /* Thêm cuộn dọc cho các dòng dữ liệu */
+      #chatDiv {
+        max-height: 300px;
+        overflow-y: scroll;
+      }
+    </style>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script>
+      google.charts.load('current', { packages: ['table'] });
+      google.charts.setOnLoadCallback(drawTable);
+
+      function drawTable() {
+        const query = new google.visualization.Query(
+          'https://docs.google.com/spreadsheets/d/e/2PACX-1vQgXsRDuuAVZElwr0KvB1nQObjF689jPq86pT8z7o4AHbFl7TeJgP_vkPvm4XcEop-N805Bm4gR85rb/pubhtml?gid=485937024&single=true&widget=true&headers=false'
+        );
+        query.setQuery('SELECT A, B, C, D');
+        query.send(handleQueryResponse);
+      }
+
+      function handleQueryResponse(response) {
+        const data = response.getDataTable();
+        const table = new google.visualization.Table(document.getElementById('chatDiv'));
+        table.draw(data, {
+          showRowNumber: false,
+          width: '100%',
+          height: '100%',
+        });
+      }
+    </script>
+  </head>
+  <body>
+    <div id="chatDiv"></div>
+  </body>
+</html>
